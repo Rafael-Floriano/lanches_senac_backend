@@ -13,4 +13,17 @@ public interface FuncionarioRepository extends JpaRepository<Funcionario, Long> 
     boolean existsByNomeIgnoreCase(@Param("nome") String nome);
 
     boolean existsByCpf(String cpf);
+
+    @Query("""
+            SELECT new com.backend_senac.lanches_senac_backend.domain.dto.FuncionarioDto(a.id, a.nome, a.cpf, a.cargo)
+            FROM Funcionario a
+            """)
+    Page<FuncionarioDto> findPaginationOfFuncionarioDto(Pageable pageable);
+
+    @Query("""
+            SELECT new com.backend_senac.lanches_senac_backend.domain.dto.FuncionarioDto(a.id, a.nome, a.cpf, a.cargo)
+            FROM Funcionario a
+            WHERE a.nome ILIKE :search
+            """)
+    Page<FuncionarioDto> findPaginationOfFuncionarioDtoByName(String search, Pageable pageable);
 }
