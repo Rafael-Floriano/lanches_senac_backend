@@ -31,7 +31,9 @@ public class FuncionarioController {
     }
 
     @GetMapping
-    public List<FuncionarioDto> listarTodos() {
-        return funcionarioService.listarTodos();
+    public Page<FuncionarioDto> paginationOfFuncionarioDto(@RequestParam(value = "search", required = false) String search,
+                                                        @RequestParam(value = "pageNumber", required = false, defaultValue = "0") int pageNumber,
+                                                        @RequestParam(value = "pageSize", required = false, defaultValue = "12") int pageSize) {
+        return funcionarioService.createPaginationOfFuncionarioDto(search, pageNumber, pageSize);
     }
 }
