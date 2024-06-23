@@ -72,7 +72,12 @@ public class FuncionarioService {
                 .orElseThrow(() -> new RegistroNaoEncontradoException("Funcionário " + id + " não encontrado!"));
     }
 
-    public List<FuncionarioDto> listarTodos() {
-        return funcionarioRepository.findAll().stream().map(FuncionarioDto::new).toList();
+    @Transactional(readOnly = true)
+    public Page<FuncionarioDto> createPaginationOfFuncionarioDto(String search, int pageNumber, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        if (search != null && !search.isBlank()) {
+            return funcionarioRepository.findPaginationOfFuncionarioDtoByName("%" + search + "%", pageable);
+        }
+        return funcionarioRepository.findPaginationOfFuncionarioDto(pageable);
     }
 }
