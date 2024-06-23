@@ -7,8 +7,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/funcionarios")
@@ -42,4 +40,5 @@ public class FuncionarioController {
     public FuncionarioDto getFuncionarioById(@PathVariable("id") Long funcionarioId) {
         return funcionarioService.getFuncionarioDtoById(funcionarioId);
     }
+
 }
