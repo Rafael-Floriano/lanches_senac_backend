@@ -13,6 +13,9 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -80,4 +83,11 @@ public class FuncionarioService {
         }
         return funcionarioRepository.findPaginationOfFuncionarioDto(pageable);
     }
+
+    @Transactional(readOnly = true)
+    public FuncionarioDto getFuncionarioDtoById(@NotNull Long funcionarioId) {
+            return funcionarioRepository.findById(funcionarioId).map(FuncionarioDto::new).orElseThrow(
+                    () -> new RegistroNaoEncontradoException("Não foi possível encontrar o funcionário - Id: " + funcionarioId));
+    }
+
 }

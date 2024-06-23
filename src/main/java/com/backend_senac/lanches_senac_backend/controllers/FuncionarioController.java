@@ -40,6 +40,6 @@ public class FuncionarioController {
 
     @GetMapping("/{id}")
     public FuncionarioDto getFuncionarioById(@PathVariable("id") Long funcionarioId) {
-        return funcionarioService.getFuncionarioById(funcionarioId);
+        return funcionarioService.getFuncionarioDtoById(funcionarioId);
     }
 }
