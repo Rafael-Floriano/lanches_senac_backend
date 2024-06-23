@@ -4,6 +4,7 @@ import com.backend_senac.lanches_senac_backend.domain.dto.FuncionarioDto;
 import com.backend_senac.lanches_senac_backend.services.FuncionarioService;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,5 +36,10 @@ public class FuncionarioController {
                                                         @RequestParam(value = "pageNumber", required = false, defaultValue = "0") int pageNumber,
                                                         @RequestParam(value = "pageSize", required = false, defaultValue = "12") int pageSize) {
         return funcionarioService.createPaginationOfFuncionarioDto(search, pageNumber, pageSize);
+    }
+
+    @GetMapping("/{id}")
+    public FuncionarioDto getFuncionarioById(@PathVariable("id") Long funcionarioId) {
+        return funcionarioService.getFuncionarioById(funcionarioId);
     }
 }
