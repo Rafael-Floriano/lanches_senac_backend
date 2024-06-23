@@ -1,6 +1,9 @@
 package com.backend_senac.lanches_senac_backend.repositories;
 
 import com.backend_senac.lanches_senac_backend.domain.Funcionario;
+import com.backend_senac.lanches_senac_backend.domain.dto.FuncionarioDto;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
